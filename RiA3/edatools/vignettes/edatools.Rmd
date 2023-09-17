@@ -1,0 +1,27 @@
+---
+title: "Introduction to edatools"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to edatools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `edatools` package is a demonstration project for learning how to 
+build an R package. It comes from chapter 21 of [R in Action (3rd ed.)](https://www.manning.com/books/r-in-action-third-edition).
+
+The package has one main function for describing a data frame, and two generic functions.
+
+```{r example}
+library(edatools)
+df_info <- contents(happiness)
+print(df_info, digits=3)
+plot(df_info)
+```
