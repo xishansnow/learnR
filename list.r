@@ -323,3 +323,9 @@ tryCatch(
 )
 install.packages("keras", repos = 'https://cloud.r-project.org')
 
+
+library(sf)
+p1 <- st_point(c(7.35, 52.42)) 
+p2 <-st_point(c(7.22, 52.18)) 
+p3 <-st_point(c(7.44, 52.19))
+
