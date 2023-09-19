@@ -96,7 +96,11 @@ ggplot(mpg, aes(x=model)) +
 
 
 # Pie charts
+install.packages("devtools")
+library(devtools)
+
 if(!require(remotes)) install.packages("remotes")
+
    devtools::install_github("rkabacoff/ggpie")
 
 library(ggplot2)

@@ -13,18 +13,23 @@ mean(weight)
 sd(weight)
 cor(age, weight)
 plot(age, weight)
+plot()
 
 # Listing 1.2 An example of commands used to manage
 # the R workspace
-setwd("C:/myprojects/project1")
+setwd("/Bigdata/Workspace/learnR/RiA3/")
 options()
-options(digits = 3)
+options(digits = 4)
+options(browser = "google-chrome-stable")
 
 # Listing 1.3 Working with a new package
 help.start()
 install.packages("vcd")
 help(package = "vcd")
 library(vcd)
+install.packages("devtools")
+library(devtools)
+
 help(Arthritis)
 Arthritis
 example(Arthritis)

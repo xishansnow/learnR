@@ -1,0 +1,6 @@
+*.RData
+*.RDS
+*.exe
+*.pdf
+*.hpp
+.vscode/

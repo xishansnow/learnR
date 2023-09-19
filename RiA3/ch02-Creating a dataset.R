@@ -63,11 +63,17 @@ patientID <- c(1, 2, 3, 4)
 age <- c(25, 34, 28, 52)
 diabetes <- c("Type1", "Type2", "Type1", "Type1")
 status <- c("Poor", "Improved", "Excellent", "Poor")
+status <- factor(status, order=TRUE, levels=c("Poor", "Improved", "Excellent"))
+status
+
+
 diabetes <- factor(diabetes)
 status <- factor(status, order = TRUE)
 patientdata <- data.frame(patientID, age, diabetes, status)
 str(patientdata)
 summary(patientdata)
+
+table(patientdata$diabetes,patientdata$status)
 
 # Listing 2.7 Creating a list
 g <- "My First List"
@@ -78,3 +84,31 @@ mylist <- list(title = g, ages = h, j, k)
 mylist
 mylist[[2]]
 mylist[["ages"]]
+
+summary(mtcars$mpg)
+plot(mtcars$mpg,mtcars$disp)
+plot(mtcars$mpg,mtcars$wt)
+
+with(mtcars,{
+stats <- summary(mpg)
+plot(mpg,disp)
+plot(mpg,wt)
+hist(mpg,breaks=15)
+stats # 作用域仅限于大括号内
+statsGlobal <<- summary(mpg) # Using Global Variable
+})
+
+statsGlobal
+
+patientdata <- data.frame(patientID,age,diabetes,status,row.names=patientID)
+patientdata  <- patientdata[2:4]
+patientdata
+str(patientdata)
+summary(patientdata)
+
+library(tibble) 
+mtcars <- as_tibble(mtcars) 
+mtcars
+
+mydata <- data.frame(age=numeric(0), gender=character(0), weight=numeric(0)) 
+mydata <- edit(mydata)

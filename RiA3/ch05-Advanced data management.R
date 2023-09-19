@@ -8,8 +8,22 @@
 # Listing 5.1 Calculating the mean and standard deviation
 x <- c(1, 2, 3, 4, 5, 6, 7, 8)
 # short way
+mean(x,na.rm = TRUE )
 mean(x)
+median(x)
 sd(x)
+var(x)
+mad(x)
+var(c(1,2,3,4))
+y <- quantile(x,c(0.3,0.5,0.84))
+range(x)
+sum(x)
+diff(x,lag=2)
+scale(x)
+
+
+
+
 # long way
 n <- length(x)
 meanx <- sum(x) / n
@@ -28,6 +42,12 @@ ggplot(data, aes(x, y)) +
   labs(x = "Normal Deviate",
        y = "Density") +
   scale_x_continuous(breaks = seq(-3, 3, 1))
+
+pnorm(1.96,mean=50,sd=10)
+
+qnorm(.9,mean=500,sd=100)
+
+rnorm(50,mean=50,sd=10)
 
 # Listing 5.2 Generating pseudo-random numbers
 # from a uniform distribution
@@ -55,6 +75,8 @@ names(mydata) <- c("y", "x1", "x2")
 
 dim(mydata)
 head(mydata, n = 10)
+
+grep("A", c("b","A","ac", "Aw"), fixed=TRUE)
 
 # Listing 5.4 Applying functions to data objects
 set.seed(1234)
@@ -102,7 +124,7 @@ roster$grade[score < y[4]] <- "F"
 
 name <- strsplit((roster$Student), " ")
 Lastname <- sapply(name, "[", 2)
-Firstname <- sapply(name, "[", 1)
+Firstname <- sapphy(name, "[", 1)
 roster <- cbind(Firstname, Lastname, roster[, -1])
 
 roster <- roster[order(Lastname, Firstname), ]
@@ -123,26 +145,29 @@ for (i in feelings) {
 }
 
 # Listing 5.8 mystats(): a user-written function for summary statistics
-mystats <- function(x, parametric = TRUE, print = FALSE) {
-  if (parametric) {
-    center <- mean(x)
-    spread <- sd(x)
-  } else {
-    center <- median(x)
-    spread <- mad(x)
-  }
-  if (print & parametric) {
-    cat("Mean=", center, "\n", "SD=", spread, "\n")
-  } else if (print & !parametric) {
-    cat("Median=", center, "\n", "MAD=", spread, "\n")
-  }
-  result <- list(center = center, spread = spread)
-  return(result)
+mystats <- function(x, parametric=TRUE, print=FALSE) { 
+  if (parametric) { 
+    center <- mean(x); 
+    spread <- sd(x) } 
+  else { 
+    center <- median(x); 
+    spread <- mad(x) 
+  } 
+
+  if (print & parametric) { 
+    cat("Mean=", center, "\n", "SD=", spread, "\n") 
+  } else if (print & !parametric) { 
+    cat("Median=", center, "\n", "MAD=", spread, "\n") 
+  } 
+
+  result <- list(center=center, spread=spread) 
+  return(result) 
 }
 
 set.seed(1234)
 x <- rnorm(500)
 y <- mystats(x)
+y <- mystats(x, parametric=FALSE, print=TRUE)
 
 # Listing 5.9 Transposing a dataset
 cars <- mtcars[1:5, 1:4]
