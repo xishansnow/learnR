@@ -18,6 +18,7 @@ leadership <- data.frame(
   q4      = c(5, 5, 5, NA, 2),
   q5      = c(5, 5, 2, NA, 1)
 )
+leadership
 
 
 # Listing 3.2 Creating new variables
