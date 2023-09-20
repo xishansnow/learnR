@@ -3,8 +3,7 @@
 # Time series                                                #
 # requires forecast, tseries, xts, patchwork, ggplot2,       #
 #   and drectlabels packages                                 #
-# install.packages(c("forecast", "tseries", "xts", ggplot2", #
-#                    "patchwork", "directlabels"))           #
+# install.packages(c("forecast", "tseries", "xts", "ggplot2", "patchwork", "directlabels"))           #
 #------------------------------------------------------------#
 
 

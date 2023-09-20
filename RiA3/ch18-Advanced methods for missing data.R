@@ -3,8 +3,7 @@
 # Advanced methods for missing data            #
 # requires packages VIM, mice, ggplot2,        # 
 #    naniar, visdat, DescTools, mi             #
-# install.packages(c("VIM", "mice", "ggplot2", #
-#    "naniar", "visdat", "DescTools", "mi"))   #
+# install.packages(c("VIM", "mice", "ggplot2", "naniar", "visdat", "DescTools", "mi"))   
 #----------------------------------------------#
 
 # load the dataset

@@ -3,9 +3,7 @@
 # Advanced graphics                                  #
 # requires packages ggplot2, ISLR, scales, showtext, #    
 # ggrepl, dplyr, gapminder, patchwork, and plotly.   #
-# install.packages(c("ggplot2", "ISLR", "scales",    #      
-#    "showtext", "ggrepl", "dplyr", "gapminder",     #  
-#    "patchwork", "plotly"))                         #
+# install.packages(c("ggplot2", "ISLR", "scales", "showtext", "ggrepl", "dplyr", "gapminder", "patchwork", "plotly"))              
 #----------------------------------------------------#
 
 library(ggplot2)

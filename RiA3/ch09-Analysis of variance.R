@@ -3,9 +3,14 @@
 # Analysis of variance                                                    #
 # requires the multcomp, car, effects, rrcov, and mvoutlier, dplyr, and   #
 #    ggplot2 packages                                                     # 
-# install.packages(c("multcomp", "car", "effects", "rrcov", "mvoutlier",  #
-#    "dplyr", "ggplot2"))                                                 # 
+ # install.packages(c("multcomp", "car", "effects", "rrcov", "mvoutlier",     "dplyr", "ggplot2"))                                                 # 
 #-------------------------------------------------------------------------#
+
+##########################################################
+###  第 9 章 方差分析
+###  当自变量是离散型变量（如类别型变量或定序变量）时，我们无法再使用连续型自变量的相关方法，并且目标将从预测转向理解不同群体之间的差异，此时的分析方法被称为方差分析（ANOVA）。
+###
+##########################################################
 
 # Listing 9.1 - One-way ANOVA
 data(cholesterol, package="multcomp")

@@ -4,9 +4,7 @@
 # requires packaged NbClust, flexclust, rattle, colorhcplot, cluster#
 #                   clusterability, ggdendro, factoextra, ggplot2   #
 #                                                                   #
-# install.packages(                                                 #
-#   c("NbClust", "flexclust", "ggdendro", "rattle", "cluster",      # 
-#      "clusterability", factoextra", "colorhcplot, "ggplot2"))     #
+install.packages(c("NbClust", "flexclust", "ggdendro", "rattle", "cluster", "clusterability", "factoextra", "colorhcplot", "ggplot2"))     #
 #-------------------------------------------------------------------#
 
 

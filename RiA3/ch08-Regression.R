@@ -5,6 +5,11 @@
 # install.packages(c("car", "MASS", "leaps", "effects", "bootstrap")) #               #
 #---------------------------------------------------------------------#
 
+
+######################################################################## 8.2 回归模型的定义与拟合（单因变量、多因变量、线性、非线性、交互效应）
+######################################################################
+
+
 # Listing 8.1 - Simple linear regression
 fit <- lm(weight ~ height, data=women)
 summary(fit)
@@ -49,9 +54,23 @@ summary(fit)
 fit <- lm(mpg ~ hp + wt + hp:wt, data=mtcars)
 summary(fit)
 
-library(effects)
+library(effects)  # 一个用于线性回归、广义线性回归的显示效果包
 plot(effect("hp:wt", fit,, list(wt=c(2.2, 3.2, 4.2))), lines=c(1,2,3), multiline=TRUE)
 
+######################################################################## 8.3 回归结果的诊断
+## 常见的诊断类型：
+##  （1）因变量的正态性（Q-Q 图）
+##  （2）因变量的独立性或自相关性（Durbin–Watson 检验）
+##  （3）因变量的同方差性（ncv 检验或 spread-Level 图）
+##  （4）自变量与因变量之间是否呈线性关系（部分残差图）
+##  （5）多个自变量与因变量之间是否存在多重共线性关系（vif 检验）
+#####################################################################
+
+##  Q-Q 图： 检查因变量的正态性，正确值应位于 45 度对角线上
+##  残差-拟合值图： 用于判断模型中是否存在未被建模的系统模式，正确建模应当是以 0 残差为均值线的无规律分布
+##  尺度-位置图： 用于判断因变量是否为同方差，正确的建模应当是以某个常数为均值的带状随机分布，不存在其他系统模式
+## 残差-杠杆图：用于分析数据中存在的杠杆值、异常值和重要影响值
+######################################################################
 
 # simple regression diagnostics
 fit <- lm(weight ~ height, data=women)
@@ -61,7 +80,7 @@ par(mfrow=c(1,1))
 
 
 # Assessing normality
-library(car)
+library(car)  # car 包提供了一系列用于回归诊断的工具
 states <- as.data.frame(state.x77[,c("Murder", "Population",
                                      "Illiteracy", "Income", "Frost")])
 fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
@@ -88,6 +107,15 @@ spreadLevelPlot(fit)
 library(car)
 vif(fit) 
 vif(fit) > 10 # problem?
+
+
+
+######################################################################## 8.4 异常值的诊断
+## 常见的诊断类型：
+##  （1）异常值（Outliers）：模型未能很好预测的观测，通常表现为异常高的残差，可以使用 outlierTest 函数进行检验
+##  （2）高杠杆点（Leverage-Points）：也称离群点，指自变量取值显著区别于其他观测的那些点，高杠杆点与因变量无关，只与自变量的取值有关。一个拟合中是否存在高杠杆点，可以用帽统计量（ 或 hat 统计量）制图来检查
+##  （3）高影响力观测：对模型参数取值具有特殊（不成比例）影响的那些观测。高影响力观测可以通过 库克距离（或 D 统计量）和相应的制图来检查
+#####################################################################
 
 # Assessing outliers
 library(car)
@@ -124,6 +152,14 @@ library(car)
 influencePlot(fit, id="noteworthy", main="Influence Plot",
               sub="Circle size is proportional to Cook's distance")
 
+####################################################################
+## 8.5 校正措施
+## （1）删除观测
+## （2）转换变量
+## （3）添加或删除因变量
+## （4）使用另一种回归方法
+####################################################################
+
 
 # Listing 8.10 - Box-Cox Transformation to normality
 library(car)
@@ -133,6 +169,12 @@ summary(powerTransform(states$Murder))
 library(car)
 boxTidwell(Murder~Population+Illiteracy,data=states)
 
+
+####################################################################
+## 8.6 回归模型的比较与选择
+## （1）嵌套模型比较法：比较含和不含某些自变量时的模型
+## （2）变量的选择：逐步回归法（一次增加或删除一个自变量）、穷举法（所有可能的自变量组合）
+####################################################################
 
 # Listing 8.11 - Comparing nested models using the anova function
 states <- as.data.frame(state.x77[,c("Murder", "Population",
@@ -176,8 +218,14 @@ subsTable <- function(obj, scale){
 subsTable(leaps, scale="adjr2")
 
 
+####################################################################
+## 8.7 测试验证
+## （1） 泛化能力：K 折交叉验证：
+## （2）变量选择：相对重要性、相对权重
+####################################################################
 
 # Listing 8.15 - Function for k-fold cross-validated R-square
+library(bootstrap)
 
 shrinkage <- function(fit, k=10, seed=1){
   require(bootstrap)
@@ -204,6 +252,7 @@ shrinkage(fit)
 fit2 <- lm(Murder ~ Population + Illiteracy,data=states)
 shrinkage(fit2)
 
+install.packages("relaimpo")
 
 # Listing 8.16 rlweights function for calculating relative importance of predictors
 relweights <- function(fit,...){
@@ -238,3 +287,13 @@ states <- as.data.frame(state.x77[,c("Murder", "Population",
                                      "Illiteracy", "Income", "Frost")])
 fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
 relweights(fit, col="blue")
+
+
+####################################################################
+## 总结 
+## （1）回归分析是一种高度交互和迭代的方法，涉及拟合模型、评估其与统计假设的拟合度、修改数据和模型以及重新拟合以获得最终结果。 
+## （2）回归诊断用于评估数据与统计假设的拟合程度，并选择修改模型或数据的方法以更紧密地满足这些假设。 
+## （3）有多种方法可用于选择要包含在最终回归模型中的变量，包括使用显着性检验、拟合统计和自动化解决方案（例如逐步回归和所有子集回归）。 
+## （4） 交叉验证可用于评估预测模型在新数据样本上的可能性能。
+## （5） 相对权重方法可用于解决变量重要性的棘手问题：确定哪些变量对于预测结果最重要。
+####################################################################

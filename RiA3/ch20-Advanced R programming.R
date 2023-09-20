@@ -2,7 +2,7 @@
 # R in Action (3rd ed): Chapter 20                                   #
 # Advanced R programming                                             #
 # requires packages ggplot2, tidyr, foreach, doParallel              #
-# install.packages(c("ggplot2", "tidyr", "foreach", "doParallel"))   #
+# install.packages(c("ggplot2", "tidyr", "foreach", "doParallel"))   q
 #--------------------------------------------------------------------#
 
 # Atomic vectors
